@@ -37,10 +37,8 @@ router.post('/', async (req, res) => {
 
 router.get('/me', authMiddleware, async (req, res) => {
   try {
-    // Retrieve user information from request object (attached by auth middleware)
-    const userId = req.user._id; // Use authenticated user's ID
-    const user = await User.findById(userId).select('-password'); // Exclude password from the response
-
+    const userId = req.user._id; 
+    const user = await User.findById(userId).select('-password'); 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -53,8 +51,6 @@ router.get('/me', authMiddleware, async (req, res) => {
   }
 });
 
-// Route: GET /api/users
-// Description: Retrieve all user profiles
 router.get('/', async (req, res) => {
   try {
     const users = await User.find({}, '-password -email -role'); // Exclude password, email, and role from the response

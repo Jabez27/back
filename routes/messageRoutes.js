@@ -6,8 +6,7 @@ const Message = require('../models/Message');
 
 router.post('/:chatroomid', authMiddleware, async (req, res) => {
   try {
-    const chatroomid = req.params.chatroomid; // Corrected
-    console.log('Chatroom ID (POST):', chatroomid); 
+    const chatroomid = req.params.chatroomid;
     const { message } = req.body;
     const username = req.user._id;
     const newMessage = new Message({

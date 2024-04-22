@@ -19,18 +19,21 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
-// // Get all chatrooms
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    // Fetch all chatrooms
-    const chatrooms = await Chatroom.find();
+    const { classValue, section } = req.query;
+    let query = {};
 
-    // Check if chatrooms exist
+    if (classValue && section) {
+      query = { classValue, section };
+    } else if (classValue) {
+      query = { classValue };
+    }
+
+    const chatrooms = await Chatroom.find(query);
     if (!chatrooms) {
       return res.status(404).json({ message: 'No chatrooms found' });
     }
-
-    // Send the chatrooms as response
     res.status(200).json(chatrooms);
   } catch (error) {
     console.error('Error fetching chatrooms:', error.message);
@@ -38,16 +41,6 @@ router.get('/', authMiddleware, async (req, res) => {
   }
 });
 
-// router.get('/', authMiddleware, async (req, res) => {
-//   try { 
-//     const { groupName, classValue, section } = req.query;
-//     const chatrooms = await Chatroom.find({ groupName, classValue, section }); 
-//     res.status(200).json(chatrooms);
-//     console.log('Chatrooms found:', chatrooms); 
-//   } catch (error) {
-//     console.error('Error fetching chatrooms:', error.message);
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// });
+
 
 module.exports = router;
