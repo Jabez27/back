@@ -2,7 +2,8 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import cors module
+const cors = require('cors');
+const { json, urlencoded } = require('body-parser');
 require('dotenv').config();
 
 const app = express();

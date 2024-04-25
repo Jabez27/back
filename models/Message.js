@@ -1,6 +1,4 @@
-const Chatroom = require('../models/Chatroom');
 const mongoose = require('mongoose');
-
 
 const messageSchema = new mongoose.Schema({
   chatroomid: {
@@ -10,12 +8,16 @@ const messageSchema = new mongoose.Schema({
   },
   message: {
     type: String,
-    required: true
+    required: true,
   },
   username: {
     type: String,
     ref: 'User',
     required: true
+  },
+  image: { 
+    type: String,
+    default: null,
   },
   createdAt: {
     type: Date,

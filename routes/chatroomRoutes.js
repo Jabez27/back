@@ -11,7 +11,6 @@ router.post('/', authMiddleware, async (req, res) => {
     const chatroom = new Chatroom({ groupName, classValue, section, createdBy });
     await chatroom.save();
 
-    console.log('Chatroom created:', chatroom);
     res.status(201).json(chatroom);
   } catch (error) {
     console.error('Error creating chatroom:', error.message);
