@@ -8,12 +8,12 @@ const messageSchema = new mongoose.Schema({
   },
   message: {
     type: String,
-    required: true,
+    required: false,
   },
   username: {
     type: String,
     ref: 'User',
-    required: true
+    required: true,
   },
   image: { 
     type: String,
